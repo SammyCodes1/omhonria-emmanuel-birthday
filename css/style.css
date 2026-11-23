@@ -673,7 +673,8 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 36rem;
+  width: min(100%, 36rem);
+  max-width: 100%;
 }
 
 .hero-title {
@@ -705,7 +706,13 @@ button {
 }
 
 .hero-name-rest {
-  white-space: nowrap;
+  white-space: normal;
+}
+
+@media (min-width: 480px) {
+  .hero-name-rest {
+    white-space: nowrap;
+  }
 }
 
 .hero-blessing {
@@ -774,8 +781,9 @@ button {
 
 .countdown {
   display: grid;
-  grid-template-columns: repeat(4, minmax(3.4rem, 4.6rem));
-  gap: 0.5rem;
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
   margin-top: 1.1rem;
 }
 
@@ -2156,6 +2164,72 @@ body.is-lightbox-open .site-nav {
   }
 }
 
+@media (max-width: 420px) {
+  .nav-brand-role {
+    font-size: 1.35rem;
+  }
+
+  .nav-brand-name {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-greeting {
+    font-size: 1.8rem;
+  }
+
+  .hero-name {
+    font-size: 2.05rem;
+  }
+
+  .hero-blessing {
+    max-width: 100%;
+    font-size: 1.15rem;
+  }
+
+  .hero-verse {
+    max-width: 100%;
+  }
+
+  .hero-verse p {
+    font-size: 0.95rem;
+  }
+
+  .hero-date {
+    gap: 0.4rem;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-date::before,
+  .hero-date::after {
+    width: 0.85rem;
+  }
+
+  .countdown-unit {
+    min-height: 3.5rem;
+    padding: 0.35rem 0.1rem 0.28rem;
+    border-radius: 0.75rem;
+  }
+
+  .countdown-value {
+    font-size: 1.05rem;
+  }
+
+  .countdown-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-nav {
+    gap: 0.55rem 0.8rem;
+  }
+
+  .offer-line {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+
 @media (max-height: 740px) {
   .hero {
     padding: 0.85rem 0 1.25rem;
@@ -3033,23 +3107,30 @@ body.is-lightbox-open .site-nav {
     padding-top: 0.85rem;
   }
 
+  /* Keep the second row inside the header, not at the bottom of the viewport. */
   .site-nav {
-    top: auto;
-    bottom: 0;
-    height: 3rem;
+    top: 0;
+    bottom: auto;
+    height: var(--header-height);
     width: 100%;
+    align-items: flex-end;
     justify-content: center;
-    padding-inline: 1.25rem;
+    padding: 0 1.25rem 0.7rem;
   }
 
   .nav-list {
-    gap: 0.85rem 1.05rem;
+    gap: 0.35rem 0.55rem;
     justify-content: center;
     flex-wrap: wrap;
   }
 
   .nav-link {
-    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.875rem;
     letter-spacing: 0.03em;
   }
 }
@@ -3622,5 +3703,136 @@ body.is-lightbox-open .site-nav {
   .archive-filter:hover,
   .archive-filter:focus-visible {
     transform: none !important;
+  }
+}
+
+/* ---------- Mobile / tablet audit fixes (do not affect 1100px+ desktop) ---------- */
+
+@media (max-width: 959px) {
+  /* Keep hero type in the lower, darker band so it does not sit on the face. */
+  .hero {
+    align-items: flex-end;
+    padding: 0 0 1.6rem;
+  }
+
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(6 15 38 / 0.1) 0%,
+      rgb(6 15 38 / 0.08) 32%,
+      rgb(6 15 38 / 0.62) 58%,
+      rgb(6 15 38 / 0.92) 100%
+    );
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-brand {
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .skip-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Soften tilt so frames stay inside the viewport on small phones. */
+  .tribute-frame-stack {
+    --frame-tilt: 1.1deg;
+    --frame-tilt-hover: 0.4deg;
+    padding-inline: 0.7rem;
+  }
+
+  .gallery-card:nth-child(odd) .gallery-item,
+  .archive-item:nth-child(odd) {
+    --gallery-tilt: -0.8deg;
+    --gallery-shift: 5px;
+  }
+
+  .gallery-card:nth-child(even) .gallery-item,
+  .archive-item:nth-child(even) {
+    --gallery-tilt: 0.8deg;
+    --gallery-shift: 5px;
+  }
+
+  .gallery,
+  .tribute,
+  .page-archive .archive-wrap {
+    overflow-x: clip;
+  }
+
+
+  .lightbox {
+    padding: 4.25rem 0.7rem 1.15rem;
+    background: #060f26;
+    overflow: auto;
+  }
+
+  .lightbox-figure img {
+    max-height: min(62dvh, calc(100dvh - 11rem));
+  }
+
+  .lightbox-prev {
+    left: 0.35rem;
+  }
+
+  .lightbox-next {
+    right: 0.35rem;
+  }
+}
+
+@media (max-width: 1099px) {
+  .footer-nav {
+    gap: 0.3rem 0.25rem;
+  }
+
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.875rem;
+  }
+
+  .footer-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+  }
+
+  .wish-form input,
+  .wish-form select,
+  .wish-form textarea {
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  .wish-form textarea {
+    min-height: 8.5rem;
+  }
+
+  .wish-count,
+  .wish-total,
+  .share-status {
+    font-size: 0.875rem;
+  }
+
+  .archive-filters {
+    gap: 0.45rem;
+  }
+
+  .archive-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
   }
 }
