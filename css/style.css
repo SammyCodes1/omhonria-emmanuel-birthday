@@ -1699,8 +1699,7 @@ body.is-lightbox-open .site-nav {
 
 .wish-field input:focus,
 .wish-field textarea:focus,
-.wish-field select:focus,
-.admin-gate input:focus {
+.wish-field select:focus {
   border-color: #d4af37;
   box-shadow: 0 0 0 3px rgb(212 175 55 / 0.32);
   outline: 2px solid #d4af37;
@@ -1710,10 +1709,6 @@ body.is-lightbox-open .site-nav {
 .wish-field input::placeholder,
 .wish-field textarea::placeholder {
   color: rgb(10 26 58 / 0.42);
-}
-
-.admin-gate input::placeholder {
-  color: rgb(250 247 239 / 0.7);
 }
 
 .wish-count {
@@ -1763,62 +1758,6 @@ body.is-lightbox-open .site-nav {
   font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.wish-admin-btn {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--gold-light);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.wish-admin-btn[hidden] {
-  display: none;
-}
-
-.admin-gate {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  max-width: 40rem;
-  margin: 0 auto 1.35rem;
-  padding: 1rem;
-  border: 1px solid var(--gold-soft);
-  border-radius: 1rem;
-  background: rgb(20 41 92 / 0.55);
-}
-
-.admin-gate[hidden] {
-  display: none;
-}
-
-.admin-gate input {
-  flex: 1 1 12rem;
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--gold-soft);
-  border-radius: 0.7rem;
-  background: var(--navy-card);
-  color: var(--cream);
-  font-family: var(--font-body);
-  font-size: 1rem;
-}
-
-.admin-gate .btn-gold {
-  min-height: 44px;
-}
-
-.admin-status {
-  flex: 1 1 100%;
-  min-height: 1.2em;
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--gold-light);
 }
 
 .wish-wall {
@@ -1953,24 +1892,6 @@ body.is-lightbox-open .site-nav {
   font-weight: 400;
   line-height: 1.55;
   white-space: pre-wrap;
-}
-
-.wish-delete {
-  margin-top: 0.85rem;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #6e5110;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.wish-delete:hover,
-.wish-delete:focus-visible {
-  color: var(--navy);
 }
 
 @media (prefers-reduced-motion: reduce) {

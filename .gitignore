@@ -1,3 +1,9 @@
 _backup-*/
 .DS_Store
 Thumbs.db
+
+# Local preview screenshots (keep them off GitHub)
+give-preview/
+/*-desktop.png
+/*-mobile.png
+/live-*.png

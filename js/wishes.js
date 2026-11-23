@@ -26,23 +26,13 @@ const countEl = document.querySelector("#wish-count");
 const totalEl = document.querySelector("#wish-total");
 const messageEl = document.querySelector("#wish-message");
 const submitBtn = document.querySelector("#wish-submit");
-const adminToggle = document.querySelector("#admin-toggle");
-const adminGate = document.querySelector("#admin-gate");
-const adminEmail = document.querySelector("#admin-email");
-const adminPassword = document.querySelector("#admin-password");
-const adminStatus = document.querySelector("#admin-status");
 
 if (form && wall) {
   const state = {
     wishes: [],
-    admin: false,
     usingFirebase: false,
     unsubscribe: null,
-    auth: null,
-    signIn: null,
-    signOut: null,
     addDoc: null,
-    deleteDoc: null,
     collectionRef: null,
   };
 
@@ -113,10 +103,6 @@ if (form && wall) {
     if (!statusEl) return;
     statusEl.textContent = message;
     statusEl.className = "wish-status" + (kind ? " is-" + kind : "");
-  }
-
-  function setAdminStatus(message) {
-    if (adminStatus) adminStatus.textContent = message;
   }
 
   function readLocal() {
@@ -204,21 +190,6 @@ if (form && wall) {
       }
       card.appendChild(message);
 
-      if (state.admin) {
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "wish-delete";
-        remove.textContent = "Delete";
-        remove.addEventListener("click", function () {
-          if (window.confirm("Remove this wish from the wall?")) {
-            removeWish(wish.id).catch(function () {
-              setStatus("The wish could not be removed.", "error");
-            });
-          }
-        });
-        card.appendChild(remove);
-      }
-
       wall.appendChild(card);
     });
   }
@@ -241,15 +212,6 @@ if (form && wall) {
     render();
   }
 
-  function removeLocal(id) {
-    const list = readLocal().filter(function (wish) {
-      return wish.id !== id;
-    });
-    writeLocal(list);
-    state.wishes = list;
-    render();
-  }
-
   function addRemote(wish) {
     return state.addDoc(state.collectionRef, {
       name: wish.name,
@@ -259,19 +221,9 @@ if (form && wall) {
     });
   }
 
-  function removeRemote(id) {
-    return state.deleteDoc(state.docRef(state.db, "wishes", id));
-  }
-
   function addWish(wish) {
     if (state.usingFirebase) return addRemote(wish);
     addLocal(wish);
-    return Promise.resolve();
-  }
-
-  function removeWish(id) {
-    if (state.usingFirebase) return removeRemote(id);
-    removeLocal(id);
     return Promise.resolve();
   }
 
@@ -286,58 +238,19 @@ if (form && wall) {
     });
   }
 
-  function authFailureMessage(err) {
-    const code = err && err.code ? err.code : "";
-    if (
-      code === "auth/invalid-credential" ||
-      code === "auth/wrong-password" ||
-      code === "auth/user-not-found" ||
-      code === "auth/invalid-email"
-    ) {
-      return "That email or password is not right.";
-    }
-    if (code === "auth/too-many-requests") {
-      return "Too many sign-in attempts. Wait a moment and try again.";
-    }
-    return "Sign-in could not be completed. Please try again.";
-  }
-
-  function showAdmin(on) {
-    state.admin = on;
-    if (adminToggle) {
-      adminToggle.hidden = false;
-      adminToggle.textContent = on ? "Sign out" : "Admin";
-    }
-    if (adminGate) adminGate.hidden = true;
-    setAdminStatus("");
-    render();
-  }
-
   async function connectFirebase() {
     if (!isFirebaseConfigured(firebaseConfig)) return false;
 
     const appMod = await import(CDN + "firebase-app.js");
     const dbMod = await import(CDN + "firebase-firestore.js");
-    const authMod = await import(CDN + "firebase-auth.js");
 
     const app = appMod.initializeApp(firebaseConfig);
     const db = dbMod.getFirestore(app);
-    const auth = authMod.getAuth(app);
 
-    state.db = db;
-    state.auth = auth;
     state.usingFirebase = true;
     state.collectionRef = dbMod.collection(db, "wishes");
     state.addDoc = dbMod.addDoc;
-    state.deleteDoc = dbMod.deleteDoc;
-    state.docRef = dbMod.doc;
     state.serverTimestamp = dbMod.serverTimestamp;
-    state.signIn = authMod.signInWithEmailAndPassword;
-    state.signOut = authMod.signOut;
-
-    authMod.onAuthStateChanged(auth, function (user) {
-      showAdmin(Boolean(user));
-    });
 
     const wishesQuery = dbMod.query(state.collectionRef, dbMod.orderBy("createdAt", "desc"));
     state.unsubscribe = dbMod.onSnapshot(
@@ -358,7 +271,6 @@ if (form && wall) {
       function () {
         if (state.unsubscribe) state.unsubscribe();
         state.usingFirebase = false;
-        if (adminToggle) adminToggle.hidden = true;
         setStatus("The live wall could not be reached. Showing wishes from this browser.", "error");
         subscribeLocal();
       }
@@ -450,53 +362,12 @@ if (form && wall) {
       });
   });
 
-  if (adminToggle && adminGate) {
-    adminToggle.addEventListener("click", function () {
-      if (!state.usingFirebase || !state.auth) return;
-      if (state.admin) {
-        state.signOut(state.auth).catch(function () {
-          setAdminStatus("Sign-out could not be completed. Please try again.");
-        });
-        return;
-      }
-      adminGate.hidden = !adminGate.hidden;
-      setAdminStatus("");
-      if (!adminGate.hidden && adminEmail) adminEmail.focus();
-    });
-
-    adminGate.addEventListener("submit", function (event) {
-      event.preventDefault();
-      if (!state.usingFirebase || !state.signIn) return;
-      const email = adminEmail ? adminEmail.value.trim() : "";
-      const password = adminPassword ? adminPassword.value : "";
-      if (!email || !password) {
-        setAdminStatus("Enter the admin email and password.");
-        return;
-      }
-      const signInBtn = adminGate.querySelector('button[type="submit"]');
-      if (signInBtn) signInBtn.disabled = true;
-      setAdminStatus("");
-      state
-        .signIn(state.auth, email, password)
-        .then(function () {
-          adminGate.reset();
-        })
-        .catch(function (err) {
-          setAdminStatus(authFailureMessage(err));
-        })
-        .then(function () {
-          if (signInBtn) signInBtn.disabled = false;
-        });
-    });
-  }
-
   connectFirebase()
     .then(function (ok) {
       if (!ok) subscribeLocal();
     })
     .catch(function () {
       state.usingFirebase = false;
-      if (adminToggle) adminToggle.hidden = true;
       subscribeLocal();
     });
 }

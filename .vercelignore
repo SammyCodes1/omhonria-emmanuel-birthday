@@ -11,3 +11,8 @@ story-desktop.png
 story-mobile.png
 archive-desktop.png
 archive-mobile.png
+
+give-preview/
+*-desktop.png
+*-mobile.png
+live-*.png
