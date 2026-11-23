@@ -2718,8 +2718,8 @@ body.is-lightbox-open .site-nav {
 .page-give .offer-details {
   display: grid;
   gap: 0.9rem;
-  margin: 1.25rem 0 0;
-  padding: 1rem 1.05rem 0.95rem;
+  margin: 1.35rem 0 0;
+  padding: 1.1rem 1.15rem 1.15rem;
   border: 1px solid rgb(212 175 55 / 0.28);
   border-radius: 0.9rem;
   background: rgb(10 26 58 / 0.05);
@@ -2752,79 +2752,6 @@ body.is-lightbox-open .site-nav {
 
 .page-give .offer-card--dollar .offer-who {
   color: var(--cream-muted);
-}
-
-.page-give .offer-number {
-  margin: 0.15rem 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  color: var(--navy);
-  user-select: all;
-}
-
-.page-give .offer-card--dollar .offer-number {
-  color: var(--gold-light);
-}
-
-.page-give .offer-card .give-copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  align-self: stretch;
-  margin-top: 1rem;
-  min-height: 48px;
-}
-
-.page-give .give-copy-icon {
-  display: grid;
-  place-items: center;
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-.page-give .give-copy-icon svg {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-.page-give .give-copy-icon--check {
-  display: none;
-}
-
-.page-give .give-copy.is-copied .give-copy-icon--copy {
-  display: none;
-}
-
-.page-give .give-copy.is-copied .give-copy-icon--check {
-  display: grid;
-  animation: give-copied-pop 360ms var(--ease);
-}
-
-.page-give .offer-card--naira .give-copy {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--gold-light);
-}
-
-.page-give .offer-card--naira .give-copy:hover,
-.page-give .offer-card--naira .give-copy:focus-visible,
-.page-give .offer-card--naira .give-copy.is-copied {
-  background: var(--gold-gradient);
-  border-color: var(--gold);
-  color: var(--navy-dark);
-  box-shadow: 0 0 22px rgb(212 175 55 / 0.35);
-}
-
-.page-give .offer-card--dollar .give-copy:hover,
-.page-give .offer-card--dollar .give-copy:focus-visible,
-.page-give .offer-card--dollar .give-copy.is-copied {
-  background: var(--gold-gradient);
-  border-color: var(--gold);
-  color: var(--navy-dark);
-  box-shadow: 0 0 22px rgb(212 175 55 / 0.35);
 }
 
 .page-give .offer-more {
@@ -2912,56 +2839,6 @@ body.is-lightbox-open .site-nav {
   transform: translateX(3px);
 }
 
-.page-give .give-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 1.4rem;
-  z-index: 50;
-  min-width: min(22rem, calc(100% - 2rem));
-  margin: 0;
-  padding: 0.7rem 1.2rem;
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  background: var(--navy-dark);
-  color: var(--gold-light);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-align: center;
-  box-shadow: 0 14px 36px rgb(0 0 0 / 0.4), 0 0 20px rgb(212 175 55 / 0.16);
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, 0.7rem);
-  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
-}
-
-.page-give .give-toast.is-visible {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-.page-give .give-copy {
-  min-height: 48px;
-  padding: 0.5rem 1.1rem;
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--gold-light);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    background var(--duration) var(--ease),
-    color var(--duration) var(--ease),
-    border-color var(--duration) var(--ease),
-    box-shadow var(--duration) var(--ease);
-}
-
-.page-give .give-copy:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
-}
-
 .page-give .offer-grid .offer-card:nth-child(1).reveal {
   transition-delay: 80ms;
 }
@@ -2977,11 +2854,6 @@ body.is-lightbox-open .site-nav {
 @keyframes give-sheen {
   from { transform: translateX(-120%) skewX(-16deg); }
   to { transform: translateX(280%) skewX(-16deg); }
-}
-
-@keyframes give-copied-pop {
-  from { transform: scale(0.6); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 
 @media (min-width: 800px) {
@@ -3023,8 +2895,11 @@ body.is-lightbox-open .site-nav {
   }
 
   .page-give .give-how {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 2.25rem;
     padding: 1.15rem 0.4rem 1.2rem;
     border: 1px solid rgb(212 175 55 / 0.28);
@@ -3227,11 +3102,6 @@ body.is-lightbox-open .site-nav {
   .page-give .offer-more a:hover,
   .page-give .offer-more a:focus-visible {
     transform: none;
-  }
-
-  .page-give .give-toast,
-  .page-give .give-toast.is-visible {
-    transform: translate(-50%, 0);
   }
 
   .page-give .offer-card::after {
