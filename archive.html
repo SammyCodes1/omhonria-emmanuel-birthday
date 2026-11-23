@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A1A3A" />
+    <meta
+      name="description"
+      content="A photo archive honouring Pastor Omhonria Emmanuel and Psalmist Nation Tabernacle. January 14."
+    />
+    <title>Photo Archive | Pastor Omhonria Emmanuel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css?v=20261123l" />
+    <link rel="stylesheet" href="css/motion.css?v=20261123l" />
+    <script>
+      (function () {
+        try {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          if (sessionStorage.getItem("oe-intro") === "1") {
+            document.documentElement.classList.add("is-return");
+            return;
+          }
+          document.documentElement.classList.add("is-intro");
+        } catch (err) {}
+      })();
+    </script>
+  </head>
+  <body class="page-archive">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" id="top">
+      <div class="nav-inner">
+        <a class="nav-brand" href="index.html">
+          <span class="nav-brand-role">Pastor</span>
+          <span class="nav-brand-name">Omhonria Emmanuel</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="index.html#tribute">Tribute</a></li>
+        <li><a class="nav-link" href="index.html#journey">Journey</a></li>
+        <li><a class="nav-link" href="index.html#gallery">Gallery</a></li>
+        <li><a class="nav-link is-active" href="archive.html" aria-current="page">Archive</a></li>
+        <li><a class="nav-link" href="index.html#wishes">Wishes</a></li>
+        <li><a class="nav-link" href="story.html">His Story</a></li>
+        <li><a class="nav-link" href="give.html">Give</a></li>
+      </ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section class="archive-hero" aria-labelledby="archive-heading">
+        <div class="container">
+          <p class="eyebrow reveal">Scenes from the house</p>
+          <h1 id="archive-heading" class="section-heading reveal">Photo Archive</h1>
+          <p class="archive-lead reveal">Photographs from the life and ministry of Pastor Omhonria Emmanuel, and from Psalmist Nation Tabernacle.</p>
+        </div>
+      </section>
+      <section class="archive-panel" aria-label="Archive photographs">
+        <div class="container archive-wrap">
+          <!--
+            To add a photograph:
+            1. Save the file in the images/ folder (for example images/gallery7.jpg).
+            2. Open js/archive.js and add an entry to the ARCHIVE_PHOTOS list at the top.
+            3. Use category "ministry" or "portraits", or add a new lowercase category of your own (a chip will appear automatically).
+            Do not add logos or SVG icons to the list.
+          -->
+          <div class="archive-filters reveal" id="archive-filters" role="toolbar" aria-label="Filter photographs"></div>
+          <div class="archive-grid" id="archive-grid"></div>
+          <p class="archive-empty" id="archive-empty">No photographs in this collection yet.</p>
+        </div>
+      </section>
+    </main>
+    <footer id="footer" class="footer" aria-labelledby="footer-heading">
+      <div class="container footer-inner">
+        <p class="footer-role">Pastor</p>
+        <h2 id="footer-heading" class="footer-name">Omhonria Emmanuel</h2>
+        <p class="footer-date">January 14</p>
+        <p class="footer-blessing">The Lord bless you and keep you. The Lord make His face shine upon you, and be gracious to you.</p>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="index.html#tribute">Tribute</a>
+          <a href="index.html#journey">Journey</a>
+          <a href="index.html#gallery">Gallery</a>
+          <a href="archive.html">Archive</a>
+          <a href="index.html#wishes">Wishes</a>
+          <a href="story.html">His Story</a>
+          <a href="give.html">Give</a>
+        </nav>
+        <p class="footer-credit">With love from <span>Psalmist Nation Tabernacle</span></p>
+        <a class="footer-top" href="#top">Back to top</a>
+      </div>
+    </footer>
+    <div
+      class="lightbox"
+      id="lightbox"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightbox-caption"
+    >
+      <button class="lightbox-close" type="button" aria-label="Close photograph">&times;</button>
+      <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous photograph"></button>
+      <figure class="lightbox-figure">
+        <img id="lightbox-image" alt="Photograph" />
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+      <button class="lightbox-nav lightbox-next" type="button" aria-label="Next photograph"></button>
+    </div>
+    <script src="js/archive.js?v=20261123l"></script>
+    <script src="js/main.js?v=20261123l"></script>
+    <script src="js/motion.js?v=20261123l"></script>
+  </body>
+</html>

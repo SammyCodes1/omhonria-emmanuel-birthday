@@ -1,0 +1,13 @@
+# Keep backups and local preview shots off the production deploy
+_backup-*/
+_backup-*
+give-desktop.png
+give-mobile.png
+tribute-desktop.png
+tribute-mobile.png
+live-give.png
+live-tribute.png
+story-desktop.png
+story-mobile.png
+archive-desktop.png
+archive-mobile.png

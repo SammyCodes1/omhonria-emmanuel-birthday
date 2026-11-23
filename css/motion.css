@@ -1,0 +1,486 @@
+/* ============================================================
+   Premium motion system. Palette, layout and content stay put.
+   Animations use transform and opacity only. Reduced motion wins.
+   ============================================================ */
+
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --z-progress: 90;
+  --z-intro: 120;
+}
+
+/* ---------- Page intro (first visit in the session) ---------- */
+
+html.is-intro,
+html.is-leaving {
+  overflow: hidden;
+}
+
+html.is-intro::before,
+html.is-leaving::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-intro);
+  background: #0a1a3a;
+  pointer-events: none;
+}
+
+html.is-intro::before {
+  animation: motion-intro-veil 900ms var(--motion-ease) forwards;
+  pointer-events: auto;
+}
+
+html.is-intro::after {
+  content: "OE";
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  z-index: calc(var(--z-intro) + 1);
+  padding: 0 0 0.85rem 0.38em;
+  border-bottom: 1px solid #d4af37;
+  color: #d4af37;
+  font-family: var(--font-display, "Playfair Display", "Times New Roman", serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  animation: motion-intro-mark 900ms var(--motion-ease) forwards;
+  pointer-events: none;
+}
+
+html.is-leaving::before {
+  opacity: 0;
+  animation: motion-leave-veil 280ms var(--motion-ease-out) forwards;
+  pointer-events: auto;
+}
+
+html.is-return body {
+  animation: motion-page-in 480ms var(--motion-ease) both;
+}
+
+@keyframes motion-intro-veil {
+  0%,
+  62% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes motion-intro-mark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -42%) scaleX(0.28);
+  }
+  28% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  72% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
+@keyframes motion-leave-veil {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes motion-page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---------- Scroll progress ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-progress);
+  height: 2px;
+  pointer-events: none;
+  background: rgb(212 175 55 / 0.18);
+}
+
+.scroll-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #d4af37, #f0d77b);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+/* ---------- Header: turns more solid, brand eases slightly ---------- */
+
+.site-header {
+  transition: box-shadow 320ms var(--motion-ease);
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgb(6 15 38 / 0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms var(--motion-ease);
+}
+
+.site-header .nav-inner,
+.site-header .nav-toggle {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header .nav-brand {
+  transform-origin: left center;
+  transition: transform 320ms var(--motion-ease);
+}
+
+.site-header.is-compact {
+  box-shadow:
+    inset 0 -1px 0 rgb(240 215 123 / 0.85),
+    inset 0 -5px 0 #0a1a3a,
+    inset 0 -6px 0 rgb(212 175 55 / 0.7),
+    0 10px 24px rgb(6 15 38 / 0.28);
+}
+
+.site-header.is-compact::after {
+  opacity: 1;
+}
+
+.site-header.is-compact .nav-brand {
+  transform: scale(0.92);
+}
+
+/* Stronger gold underline on desktop nav (mobile menu is unchanged). */
+
+@media (min-width: 768px) {
+  .nav-link::after {
+    height: 1.5px;
+    background: linear-gradient(90deg, #d4af37, #f0d77b);
+    transform-origin: center;
+  }
+}
+
+/* ---------- Enhanced scroll reveal ---------- */
+
+.reveal {
+  transition:
+    opacity 800ms var(--motion-ease),
+    transform 800ms var(--motion-ease);
+  transition-delay: var(--stagger, 0ms);
+}
+
+/* Staggered groups already marked .reveal in the markup. */
+
+.stat-grid .stat-card.reveal:nth-child(1) { --stagger: 0ms; }
+.stat-grid .stat-card.reveal:nth-child(2) { --stagger: 100ms; }
+.stat-grid .stat-card.reveal:nth-child(3) { --stagger: 200ms; }
+
+.timeline .timeline-item.reveal:nth-child(1) { --stagger: 0ms; }
+.timeline .timeline-item.reveal:nth-child(2) { --stagger: 80ms; }
+.timeline .timeline-item.reveal:nth-child(3) { --stagger: 160ms; }
+.timeline .timeline-item.reveal:nth-child(4) { --stagger: 240ms; }
+.timeline .timeline-item.reveal:nth-child(5) { --stagger: 320ms; }
+
+.gallery-grid .gallery-card.reveal:nth-child(1) { --stagger: 0ms; }
+.gallery-grid .gallery-card.reveal:nth-child(2) { --stagger: 70ms; }
+.gallery-grid .gallery-card.reveal:nth-child(3) { --stagger: 140ms; }
+.gallery-grid .gallery-card.reveal:nth-child(4) { --stagger: 210ms; }
+.gallery-grid .gallery-card.reveal:nth-child(5) { --stagger: 280ms; }
+.gallery-grid .gallery-card.reveal:nth-child(6) { --stagger: 350ms; }
+
+/* Word-stat cards ease in with a hint of scale. */
+
+.stat-card.reveal {
+  transform: translateY(28px) scale(0.97);
+}
+
+.stat-card.reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+
+.stat-card.reveal.is-visible:hover,
+.stat-card.reveal.is-visible:focus-within {
+  transform: translateY(-5px) scale(1);
+}
+
+/* Gold divider draws when its heading comes into view. */
+
+.tribute-intro .tribute-title::after,
+.section--cream .section-heading::after,
+.journey .section-heading::after {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 700ms var(--motion-ease) 180ms;
+}
+
+.tribute-intro.is-visible .tribute-title::after,
+.section-heading.reveal.is-visible::after,
+.section-heading.is-visible::after {
+  transform: scaleX(1);
+}
+
+.section--cream .section-heading,
+.journey .section-heading {
+  /* cream/navy headings already have a line; keep origin consistent */
+}
+
+/* ---------- Hero line reveal ---------- */
+
+.hero-copy.hero-is-ready > * {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: motion-line-in 740ms var(--motion-ease) forwards;
+  animation-delay: calc(var(--line, 0) * 90ms + var(--hero-delay, 0ms));
+}
+
+.hero-copy.hero-is-ready {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes motion-line-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer sweep across gold display headings. */
+
+.motion-shimmer {
+  position: relative;
+  /* overflow-x: hidden with visible y computes to overflow-y: auto and
+     shows an inner scrollbar (Windows) because the sheen ::before is inset
+     slightly outside the box. Clip both axes instead; the in-flow gold
+     divider is not cropped. */
+  overflow: hidden;
+}
+
+.motion-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: -0.15em -0.4em;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(240 215 123 / 0.38) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.motion-shimmer.is-shimmering::before {
+  animation: motion-shimmer-sweep 1100ms var(--motion-ease-out) both;
+}
+
+@keyframes motion-shimmer-sweep {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+  18% { opacity: 1; }
+  82% { opacity: 1; }
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+/* ---------- Cards, buttons, gallery ---------- */
+
+.timeline-card,
+.stat-card,
+.gallery-item,
+.wish-form,
+.page-give .offer-card,
+.page-give .offer-more a {
+  transition:
+    transform 360ms var(--motion-ease),
+    box-shadow 360ms var(--motion-ease),
+    border-color 360ms var(--motion-ease);
+}
+
+.timeline-item.is-visible .timeline-card:hover,
+.timeline-item.is-visible .timeline-card:focus-within {
+  transform: translateY(-5px);
+}
+
+.gallery-item.reveal.is-visible:hover,
+.gallery-item.reveal.is-visible:focus-visible,
+.gallery-item:hover,
+.gallery-item:focus-visible {
+  transform: translateY(-6px) rotate(0.35deg);
+  box-shadow:
+    inset 0 0 0 4px #f7f1e4,
+    inset 0 0 0 5px rgb(212 175 55 / 0.85),
+    var(--gallery-shift, 7px) 11px 0 -2px #0a1a3a,
+    calc(var(--gallery-shift, 7px) + 1px) 12px 0 -1px #d4af37,
+    0 22px 34px rgb(10 26 58 / 0.18);
+}
+
+.gallery-item:hover img,
+.gallery-item:focus-visible img {
+  transform: scale(1.07);
+}
+
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 280ms var(--motion-ease),
+    box-shadow 280ms var(--motion-ease);
+}
+
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.38) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.btn-gold:hover,
+.btn-gold:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgb(212 175 55 / 0.38);
+}
+
+.btn-gold:hover::before,
+.btn-gold:focus-visible::before {
+  transition: transform 700ms var(--motion-ease);
+  transform: translateX(120%);
+}
+
+.btn-gold:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.share-btn {
+  transition: transform 280ms var(--motion-ease), box-shadow 280ms var(--motion-ease), border-color var(--duration, 280ms) var(--ease);
+}
+
+.share-btn:hover,
+.share-btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+/* Magnetic offset is applied as --mx/--my from JS, transform only. */
+
+.btn-gold.is-magnetic,
+.share-btn.is-magnetic {
+  transform: translate3d(var(--mx, 0px), var(--my, 0px), 0);
+}
+
+/* ---------- Parallax hooks (JS sets --parallax) ---------- */
+
+.hero-bg {
+  transform: translate3d(0, var(--parallax, 0px), 0) scale(1.08);
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.tribute-frame-stack {
+  transform: translate3d(0, var(--parallax, 0px), 0);
+  will-change: transform;
+}
+
+/* ---------- Reduced motion: turn the system off ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.is-intro::before,
+  html.is-intro::after,
+  html.is-leaving::before,
+  .scroll-progress,
+  .site-header::after,
+  .motion-shimmer::before,
+  .btn-gold::before {
+    content: none;
+    animation: none !important;
+    display: none;
+  }
+
+  html.is-intro,
+  html.is-leaving,
+  html.is-return body {
+    overflow: auto;
+    animation: none !important;
+  }
+
+  .reveal,
+  .stat-card.reveal,
+  .stat-card.reveal.is-visible,
+  .stat-card.reveal.is-visible:hover,
+  .hero-copy.hero-is-ready,
+  .hero-copy.hero-is-ready > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .tribute-intro .tribute-title::after,
+  .section--cream .section-heading::after,
+  .journey .section-heading::after,
+  .tribute-intro.is-visible .tribute-title::after,
+  .section-heading.reveal.is-visible::after,
+  .section-heading.is-visible::after {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+
+  .site-header,
+  .site-header.is-compact,
+  .site-header .nav-brand,
+  .site-header.is-compact .nav-brand,
+  .timeline-card,
+  .btn-gold,
+  .btn-gold:hover,
+  .btn-gold:active,
+  .share-btn,
+  .hero-bg,
+  .tribute-frame-stack {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Keep the tribute frame's static slant; do not flatten it. */
+  .tribute-frame-stack {
+    transform: none;
+  }
+
+  .gallery-item,
+  .gallery-item.reveal,
+  .gallery-item.reveal.is-visible,
+  .gallery-item:hover,
+  .gallery-item:focus-visible {
+    transform: rotate(var(--gallery-tilt, 0deg)) !important;
+    transition: none !important;
+  }
+
+  .gallery-item:hover img,
+  .gallery-item:focus-visible img {
+    transform: none !important;
+  }
+}
