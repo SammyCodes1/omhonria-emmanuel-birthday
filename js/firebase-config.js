@@ -2,10 +2,11 @@
 // Firebase console over these placeholders. Empty values, and keys that still
 // say YOUR_, keep wishes in this browser only.
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef",
+  apiKey: "AIzaSyD3_mEoRvarOHAkBK95BeBr_4iEzjcEROQ",
+  authDomain: "emmanuel-omhonria-birthday.firebaseapp.com",
+  projectId: "emmanuel-omhonria-birthday",
+  storageBucket: "emmanuel-omhonria-birthday.firebasestorage.app",
+  messagingSenderId: "568022130236",
+  appId: "1:568022130236:web:68b29645d3c334ce1eed39",
+  measurementId: "G-H4085ZVNEP",
 };
