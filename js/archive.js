@@ -110,6 +110,11 @@
       src: "images/gallery-mentor.jpg",
       alt: "",
       category: "ministry"
+    },
+    {
+      src: "images/gallery-psalmist.jpg",
+      alt: "",
+      category: "ministry"
     }
   ];
 
