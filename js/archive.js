@@ -131,6 +131,11 @@
       src: "images/gallery-psalmist.jpg",
       alt: "",
       category: "ministry"
+    },
+    {
+      src: "images/gallery-father.jpg",
+      alt: "",
+      category: "ministry"
     }
   ];
 

@@ -1345,6 +1345,11 @@ button {
      and up so the hoodie text and his figure stay in the crop. */
   object-position: 55% 40%;
 }
+.gallery-item img.gallery-father-photo {
+  /* Portrait source is taller than the 4:3 frame; bias up and slightly
+     left so his face, the microphone, and his hands stay in the crop. */
+  object-position: 43% 38%;
+}
 
 .gallery-card:nth-child(3n+2) .gallery-item img {
   border-radius: 0.7rem 0.7rem 0.35rem 0.35rem;
