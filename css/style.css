@@ -3549,8 +3549,9 @@ body.is-lightbox-open .site-nav {
 }
 
 .archive-grid {
-  column-count: 1;
-  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem 1.5rem;
 }
 
 .page-archive .container.archive-wrap {
@@ -3563,8 +3564,8 @@ body.is-lightbox-open .site-nav {
   }
 
   .archive-grid {
-    column-count: 2;
-    column-gap: 1.55rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem 1.55rem;
   }
 }
 
@@ -3580,9 +3581,50 @@ body.is-lightbox-open .site-nav {
   }
 
   .archive-grid {
-    column-count: 3;
-    column-gap: 1.65rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.6rem 1.65rem;
   }
+
+  /* First row: wife portrait top left, leaders group top right, equal height. */
+  .archive-card--wife {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .archive-card--leaders {
+    grid-column: 2 / 4;
+    grid-row: 1;
+  }
+  .archive-card--wife .archive-item.is-tall img {
+    aspect-ratio: 3 / 4;
+    object-position: center 58%;
+  }
+}
+
+.archive-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+.archive-card .gallery-caption {
+  color: #0a1a3a;
+  max-width: 36ch;
+}
+
+.archive-card.reveal {
+  transform: translateY(24px);
+}
+
+.archive-card.reveal.is-visible {
+  transform: translateY(0);
+}
+
+.archive-card[hidden] {
+  display: none;
 }
 
 .archive-item {
@@ -3591,10 +3633,7 @@ body.is-lightbox-open .site-nav {
   position: relative;
   display: inline-block;
   width: 100%;
-  margin: 0 0 1.6rem;
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
+  margin: 0;
   padding: 0.55rem;
   overflow: visible;
   border: 1px solid #d4af37;
@@ -3612,12 +3651,12 @@ body.is-lightbox-open .site-nav {
   transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
 }
 
-.archive-item:nth-child(odd) {
+.archive-card:nth-child(odd) .archive-item {
   --gallery-tilt: -1.3deg;
   --gallery-shift: -7px;
 }
 
-.archive-item:nth-child(even) {
+.archive-card:nth-child(even) .archive-item {
   --gallery-tilt: 1.3deg;
   --gallery-shift: 7px;
 }
@@ -3644,6 +3683,28 @@ body.is-lightbox-open .site-nav {
 .archive-item.is-portrait img {
   aspect-ratio: 4 / 5;
   object-position: center 16%;
+}
+
+.archive-item.is-group img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+}
+
+.archive-item.is-group:hover img,
+.archive-item.is-group:focus-visible img {
+  transform: none;
+}
+
+.archive-item.is-tall img {
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+.archive-item.is-tall:hover img,
+.archive-item.is-tall:focus-visible img {
+  transform: none;
 }
 
 .archive-item.reveal {
@@ -3689,11 +3750,11 @@ body.is-lightbox-open .site-nav {
 }
 
 @media (min-width: 768px) {
-  .archive-item:nth-child(odd) {
+  .archive-card:nth-child(odd) .archive-item {
     --gallery-tilt: -1.85deg;
   }
 
-  .archive-item:nth-child(even) {
+  .archive-card:nth-child(even) .archive-item {
     --gallery-tilt: 1.85deg;
   }
 }
@@ -3756,13 +3817,13 @@ body.is-lightbox-open .site-nav {
   }
 
   .gallery-card:nth-child(odd) .gallery-item,
-  .archive-item:nth-child(odd) {
+  .archive-card:nth-child(odd) .archive-item {
     --gallery-tilt: -0.8deg;
     --gallery-shift: 5px;
   }
 
   .gallery-card:nth-child(even) .gallery-item,
-  .archive-item:nth-child(even) {
+  .archive-card:nth-child(even) .archive-item {
     --gallery-tilt: 0.8deg;
     --gallery-shift: 5px;
   }

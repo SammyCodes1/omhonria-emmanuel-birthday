@@ -12,6 +12,43 @@
   */
   var ARCHIVE_PHOTOS = [
     {
+      src: "images/archive-wife.jpg",
+      alt: "The Wife of His Youth",
+      caption: "The Wife of His Youth",
+      category: "ministry",
+      tall: true,
+      featured: "wife"
+    },
+    {
+      src: "images/archive-leaders.jpg",
+      alt: "With The Leaders",
+      caption: "With The Leaders",
+      category: "ministry",
+      group: true,
+      featured: "leaders"
+    },
+    {
+      src: "images/archive-ushering.jpg",
+      alt: "The Ushering and Protocol Unit",
+      caption: "The Ushering and Protocol Unit",
+      category: "ministry",
+      group: true
+    },
+    {
+      src: "images/archive-choir.jpg",
+      alt: "The Choir Unit",
+      caption: "The Choir Unit",
+      category: "ministry",
+      group: true
+    },
+    {
+      src: "images/archive-media.jpg",
+      alt: "The Media Unit",
+      caption: "The Media Unit",
+      category: "ministry",
+      group: true
+    },
+    {
       src: "images/pastor.jpg",
       alt: "Pastor Omhonria Emmanuel seated for a portrait, in a white shirt and patterned tie",
       category: "portraits",
@@ -119,13 +156,21 @@
   function renderGrid() {
     grid.innerHTML = "";
     ARCHIVE_PHOTOS.forEach(function (photo, index) {
+      var card = document.createElement("figure");
+      card.className = "archive-card reveal";
+      if (photo.featured === "wife") card.className += " archive-card--wife";
+      if (photo.featured === "leaders") card.className += " archive-card--leaders";
+      card.setAttribute("data-category", photo.category || "ministry");
+
       var button = document.createElement("button");
-      button.className = "archive-item reveal";
+      button.className = "archive-item";
       if (photo.portrait) button.className += " is-portrait";
+      if (photo.group) button.className += " is-group";
+      if (photo.tall) button.className += " is-tall";
       button.type = "button";
       button.setAttribute("data-archive-index", String(index));
       button.setAttribute("data-category", photo.category || "ministry");
-      button.setAttribute("aria-label", "View " + (photo.alt || "photograph"));
+      button.setAttribute("aria-label", "View " + (photo.alt || photo.caption || "photograph"));
 
       var mat = document.createElement("span");
       mat.className = "gallery-mat";
@@ -144,13 +189,24 @@
       mat.appendChild(img);
       mat.appendChild(overlay);
       button.appendChild(mat);
-      grid.appendChild(button);
+      card.appendChild(button);
+
+      var captionText = (photo.caption || "").trim();
+      if (captionText) {
+        var cap = document.createElement("figcaption");
+        cap.className = "gallery-caption";
+        cap.textContent = captionText;
+        card.appendChild(cap);
+      }
+
+      grid.appendChild(card);
     });
   }
 
   function visibleButtons() {
     return Array.prototype.slice.call(grid.querySelectorAll(".archive-item")).filter(function (btn) {
-      return !btn.hidden;
+      var card = btn.closest(".archive-card");
+      return !btn.hidden && !(card && card.hidden);
     });
   }
 
@@ -160,10 +216,15 @@
     var shown = 0;
     Array.prototype.forEach.call(buttons, function (btn) {
       var match = currentFilter === "all" || btn.getAttribute("data-category") === currentFilter;
+      var card = btn.closest(".archive-card") || btn;
+      card.hidden = !match;
       btn.hidden = !match;
       if (match) {
         shown += 1;
-        if (reduceMotion) btn.classList.add("is-visible");
+        if (reduceMotion) {
+          btn.classList.add("is-visible");
+          card.classList.add("is-visible");
+        }
       }
     });
     if (empty) empty.classList.toggle("is-visible", shown === 0);
