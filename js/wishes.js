@@ -12,7 +12,7 @@ const POSITION_ICONS = {
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 14.2 9l5.8.5-4.4 3.8 1.4 5.7L12 15.8 6.99 19l1.4-5.7L4 9.5l5.8-.5L12 3.5z"/></svg>',
 };
 const NAME_MAX = 60;
-const MESSAGE_MAX = 300;
+const MESSAGE_MAX = 600;
 const COOLDOWN_MS = 30000;
 const PAGE = 50;
 const STORAGE_KEY = "omhonria-emmanuel-wishes";
