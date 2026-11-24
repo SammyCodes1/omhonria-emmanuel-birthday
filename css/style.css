@@ -3888,15 +3888,40 @@ body.is-lightbox-open .site-nav {
     --gallery-shift: 5px;
   }
 
-  /* Mobile: 2-column grid; trim side padding so later portrait cards can be larger. */
+  /* Mobile: rows 1-2 stay two-up; from row 3, three wide landscape cards. */
   .page-archive .container.archive-wrap {
-    width: min(36.5rem, calc(100% - 0.7rem));
+    width: min(36.5rem, calc(100% - 0.5rem));
   }
 
   .archive-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.15rem 0.45rem;
-    padding-inline: 0.12rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.9rem 0.28rem;
+    padding-inline: 0.06rem;
+  }
+
+  .page-archive .archive-card {
+    grid-column: span 2;
+  }
+
+  .page-archive .archive-card.archive-card--mobile-feature,
+  .page-archive .archive-card.archive-card--top-pair,
+  .page-archive .archive-card.archive-card--wife,
+  .page-archive .archive-card.archive-card--wife-2 {
+    grid-column: span 3;
+  }
+
+  .page-archive .archive-card:not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .archive-item {
+    padding: 0.35rem;
+  }
+
+  .page-archive .archive-card:nth-child(odd):not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .archive-item {
+    --gallery-tilt: -0.45deg;
+    --gallery-shift: 3px;
+  }
+
+  .page-archive .archive-card:nth-child(even):not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .archive-item {
+    --gallery-tilt: 0.45deg;
+    --gallery-shift: 3px;
   }
 
   .archive-card .gallery-caption {
@@ -3907,6 +3932,14 @@ body.is-lightbox-open .site-nav {
     letter-spacing: 0.06em;
     line-height: 1.35;
     overflow-wrap: break-word;
+  }
+
+  .page-archive .archive-card:not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .gallery-caption {
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-top: 0.55rem;
+    padding-inline: 0.04rem;
   }
 
   .gallery,
