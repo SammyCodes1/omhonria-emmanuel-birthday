@@ -3735,9 +3735,20 @@ body.is-lightbox-open .site-nav {
   object-position: 43% 50%;
 }
 
-/* After the first two rows: taller portrait frames on desktop and mobile. */
+/* After the first two rows: wide landscape frames on desktop and mobile. */
 .page-archive .archive-card:not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .archive-item img {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 2;
+}
+
+/* Portrait-orientation sources: keep heads in the 3:2 crop. */
+.page-archive .archive-card .archive-item img[src*="gallery-priest"] {
+  object-position: center 48%;
+}
+.page-archive .archive-card .archive-item img[src*="gallery-shepherd"] {
+  object-position: 68% 38%;
+}
+.page-archive .archive-card .archive-item img[src*="gallery-father"] {
+  object-position: center 16%;
 }
 
 .archive-item.is-group:hover img,
