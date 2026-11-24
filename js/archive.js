@@ -20,6 +20,22 @@
       featured: "wife"
     },
     {
+      src: "images/archive-wife-2.jpg",
+      alt: "The Wife of His Youth",
+      caption: "The Wife of His Youth",
+      category: "ministry",
+      tall: true,
+      featured: "wife2"
+    },
+    {
+      src: "images/archive-friend.jpg",
+      alt: "His Beloved Friend",
+      caption: "His Beloved Friend",
+      category: "ministry",
+      group: true,
+      friend: true
+    },
+    {
       src: "images/archive-leaders.jpg",
       alt: "With The Leaders",
       caption: "With The Leaders",
@@ -165,6 +181,7 @@
       var card = document.createElement("figure");
       card.className = "archive-card reveal";
       if (photo.featured === "wife") card.className += " archive-card--wife";
+      if (photo.featured === "wife2") card.className += " archive-card--wife-2";
       if (photo.featured === "leaders") card.className += " archive-card--leaders";
       if (photo.mobileFeature) card.className += " archive-card--mobile-feature";
       card.setAttribute("data-category", photo.category || "ministry");
@@ -174,6 +191,7 @@
       if (photo.portrait) button.className += " is-portrait";
       if (photo.group) button.className += " is-group";
       if (photo.tall) button.className += " is-tall";
+      if (photo.friend) button.className += " is-friend";
       button.type = "button";
       button.setAttribute("data-archive-index", String(index));
       button.setAttribute("data-category", photo.category || "ministry");

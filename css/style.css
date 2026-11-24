@@ -3586,23 +3586,34 @@ body.is-lightbox-open .site-nav {
   }
 
   .archive-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1.6rem 1.65rem;
   }
 
-  /* First row: wife portrait top left, leaders group top right, equal height. */
+  .archive-card {
+    grid-column: span 2;
+  }
+
+  /* First row: the two wife portraits, side by side and equal width. Leaders move to the next row. */
   .archive-card--wife {
-    grid-column: 1;
+    grid-column: 1 / 4;
     grid-row: 1;
   }
-  .archive-card--leaders {
-    grid-column: 2 / 4;
+  .archive-card--wife-2 {
+    grid-column: 4 / 7;
     grid-row: 1;
   }
-  .archive-card--wife .archive-item.is-tall img {
-    aspect-ratio: 3 / 4;
-    object-position: center 58%;
-  }
+}
+
+.archive-card--wife .archive-item.is-tall img,
+.archive-card--wife-2 .archive-item.is-tall img {
+  aspect-ratio: 3 / 4;
+}
+.archive-card--wife .archive-item.is-tall img {
+  object-position: center 58%;
+}
+.archive-card--wife-2 .archive-item.is-tall img {
+  object-position: center;
 }
 
 .archive-card {
@@ -3694,6 +3705,10 @@ body.is-lightbox-open .site-nav {
   aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: center;
+}
+
+.archive-item.is-group.is-friend img {
+  object-position: 43% 50%;
 }
 
 .archive-item.is-group:hover img,
