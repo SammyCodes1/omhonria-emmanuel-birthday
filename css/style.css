@@ -3580,7 +3580,7 @@ body.is-lightbox-open .site-nav {
 }
 
 @media (min-width: 768px) {
-  /* Two featured portraits on the first row, then a 2-column grid.
+  /* Rows 1-2 stay two equal cards; from row 3, three equal cards.
      Cap the width so cards stay a reasonable size on wide screens. */
   .page-archive .container.archive-wrap {
     width: min(1000px, calc(100% - 4rem));
@@ -3588,8 +3588,19 @@ body.is-lightbox-open .site-nav {
   }
 
   .archive-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.6rem 1.55rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.6rem 1.2rem;
+  }
+
+  .page-archive .archive-card {
+    grid-column: span 2;
+  }
+
+  .page-archive .archive-card.archive-card--mobile-feature,
+  .page-archive .archive-card.archive-card--top-pair,
+  .page-archive .archive-card.archive-card--wife,
+  .page-archive .archive-card.archive-card--wife-2 {
+    grid-column: span 3;
   }
 }
 
