@@ -1330,6 +1330,11 @@ button {
      his bowed head and upper body stay in the crop. */
   object-position: 50% 43%;
 }
+.gallery-item img.gallery-shepherd-photo {
+  /* Portrait source is taller than the 4:3 frame; bias up and toward
+     the right so his face and raised hand stay in the crop. */
+  object-position: 68% 22%;
+}
 
 .gallery-card:nth-child(3n+2) .gallery-item img {
   border-radius: 0.7rem 0.7rem 0.35rem 0.35rem;
