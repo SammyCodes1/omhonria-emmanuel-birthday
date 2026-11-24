@@ -3793,8 +3793,11 @@ body.is-lightbox-open .site-nav {
 .page-archive .archive-card .archive-item img[src*="gallery-father"] {
   object-position: center 16%;
 }
-.page-archive .archive-card .archive-item img[src*="gallery-celebrant-bw"] {
-  object-position: center 28%;
+.page-archive .archive-card.archive-card--top-pair .archive-item img[src*="gallery-celebrant-bw"] {
+  object-position: center 22%;
+}
+.page-archive .archive-card .archive-item img[src*="images/pastor.jpg"] {
+  object-position: center 16%;
 }
 .page-archive .archive-card .archive-item img[src*="gallery-celebrant-jacket"] {
   object-position: center 28%;

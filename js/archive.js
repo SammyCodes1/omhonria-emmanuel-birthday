@@ -65,7 +65,7 @@
       group: true
     },
     {
-      src: "images/pastor.jpg",
+      src: "images/gallery-celebrant-bw.jpg",
       alt: "The Birthday Celebrant",
       caption: "The Birthday Celebrant",
       category: "portraits",
@@ -141,7 +141,7 @@
       category: "ministry"
     },
     {
-      src: "images/gallery-celebrant-bw.jpg",
+      src: "images/pastor.jpg",
       alt: "The Birthday Celebrant",
       caption: "The Birthday Celebrant",
       category: "portraits"
