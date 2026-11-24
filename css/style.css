@@ -3580,10 +3580,10 @@ body.is-lightbox-open .site-nav {
 }
 
 @media (min-width: 768px) {
-  /* Rows 1-2 stay two equal cards; from row 3, three equal cards.
-     Cap the width so cards stay a reasonable size on wide screens. */
+  /* Rows 1-2 stay two equal cards; from row 3, three taller portrait cards.
+     A slightly wider cap keeps the 3-up frames a comfortable size. */
   .page-archive .container.archive-wrap {
-    width: min(1000px, calc(100% - 4rem));
+    width: min(1180px, calc(100% - 4rem));
     margin-inline: auto;
   }
 
@@ -3735,6 +3735,11 @@ body.is-lightbox-open .site-nav {
   object-position: 43% 50%;
 }
 
+/* After the first two rows: taller portrait frames on desktop and mobile. */
+.page-archive .archive-card:not(.archive-card--mobile-feature):not(.archive-card--top-pair):not(.archive-card--wife):not(.archive-card--wife-2) .archive-item img {
+  aspect-ratio: 3 / 4;
+}
+
 .archive-item.is-group:hover img,
 .archive-item.is-group:focus-visible img {
   transform: none;
@@ -3872,15 +3877,15 @@ body.is-lightbox-open .site-nav {
     --gallery-shift: 5px;
   }
 
-  /* Mobile: 2-column grid with the featured portrait pair on the first row. */
+  /* Mobile: 2-column grid; trim side padding so later portrait cards can be larger. */
   .page-archive .container.archive-wrap {
-    width: min(36.5rem, calc(100% - 1.25rem));
+    width: min(36.5rem, calc(100% - 0.7rem));
   }
 
   .archive-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem 0.75rem;
-    padding-inline: 0.35rem;
+    gap: 1.15rem 0.45rem;
+    padding-inline: 0.12rem;
   }
 
   .archive-card .gallery-caption {
