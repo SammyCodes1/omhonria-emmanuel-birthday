@@ -67,6 +67,11 @@
       src: "images/gallery-shepherd.jpg",
       alt: "",
       category: "ministry"
+    },
+    {
+      src: "images/gallery-mentor.jpg",
+      alt: "",
+      category: "ministry"
     }
   ];
 

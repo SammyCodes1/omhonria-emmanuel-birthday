@@ -1335,6 +1335,11 @@ button {
      the right so his face and raised hand stay in the crop. */
   object-position: 68% 22%;
 }
+.gallery-item img.gallery-mentor-photo {
+  /* Landscape source is wider than the 4:3 frame; bias slightly right
+     and up so his face and the lectern stay in the crop. */
+  object-position: 57% 35%;
+}
 
 .gallery-card:nth-child(3n+2) .gallery-item img {
   border-radius: 0.7rem 0.7rem 0.35rem 0.35rem;
