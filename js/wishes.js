@@ -14,6 +14,7 @@ const POSITION_ICONS = {
 const NAME_MAX = 60;
 const MESSAGE_MAX = 300;
 const COOLDOWN_MS = 30000;
+const PAGE = 50;
 const STORAGE_KEY = "omhonria-emmanuel-wishes";
 const COOLDOWN_KEY = "omhonria-emmanuel-wish-cooldown";
 const FIREBASE_VERSION = "10.14.1";
@@ -34,6 +35,8 @@ if (form && wall) {
     unsubscribe: null,
     addDoc: null,
     collectionRef: null,
+    pageLimit: PAGE,
+    listenWishes: null,
   };
 
   function cleanPosition(value) {
@@ -152,13 +155,44 @@ if (form && wall) {
     });
   }
 
+  function visibleList() {
+    const sorted = sortWishes(state.wishes);
+    if (state.usingFirebase) return sorted;
+    return sorted.slice(0, state.pageLimit);
+  }
+
+  function updateLoadMore() {
+    const btn = document.querySelector("#wish-load-more");
+    if (!btn) return;
+    var hasMore = false;
+    if (state.usingFirebase) {
+      hasMore = state.wishes.length >= state.pageLimit;
+    } else {
+      hasMore = sortWishes(state.wishes).length > state.pageLimit;
+    }
+    btn.hidden = !hasMore;
+    btn.disabled = false;
+  }
+
+  function loadMoreWishes() {
+    const btn = document.querySelector("#wish-load-more");
+    if (btn) btn.disabled = true;
+    state.pageLimit += PAGE;
+    if (state.usingFirebase && typeof state.listenWishes === "function") {
+      state.listenWishes();
+      return;
+    }
+    render();
+  }
+
   function render() {
-    const list = sortWishes(state.wishes);
+    const list = visibleList();
     wall.replaceChildren();
 
     if (totalEl) {
       const n = list.length;
-      totalEl.textContent = n === 0 ? "No wishes yet" : n === 1 ? "1 wish" : n + " wishes";
+      totalEl.textContent =
+        n === 0 ? "No wishes yet" : n === 1 ? "Showing 1 wish" : "Showing " + n + " wishes";
     }
 
     if (!list.length) {
@@ -166,6 +200,7 @@ if (form && wall) {
       empty.className = "wish-empty";
       empty.textContent = "Be the first to leave a blessing on this wall.";
       wall.appendChild(empty);
+      updateLoadMore();
       return;
     }
 
@@ -192,6 +227,8 @@ if (form && wall) {
 
       wall.appendChild(card);
     });
+
+    updateLoadMore();
   }
 
   function cooldownRemaining() {
@@ -252,29 +289,40 @@ if (form && wall) {
     state.addDoc = dbMod.addDoc;
     state.serverTimestamp = dbMod.serverTimestamp;
 
-    const wishesQuery = dbMod.query(state.collectionRef, dbMod.orderBy("createdAt", "desc"));
-    state.unsubscribe = dbMod.onSnapshot(
-      wishesQuery,
-      function (snapshot) {
-        state.wishes = snapshot.docs.map(function (docSnap) {
-          const data = docSnap.data() || {};
-          return {
-            id: docSnap.id,
-            name: sanitize(data.name, NAME_MAX),
-            position: cleanPosition(data.position),
-            message: sanitizeMessage(data.message, MESSAGE_MAX),
-            createdAt: data.createdAt || null,
-          };
-        });
-        render();
-      },
-      function () {
-        if (state.unsubscribe) state.unsubscribe();
-        state.usingFirebase = false;
-        setStatus("The live wall could not be reached. Showing wishes from this browser.", "error");
-        subscribeLocal();
-      }
-    );
+    state.listenWishes = function () {
+      if (state.unsubscribe) state.unsubscribe();
+      const wishesQuery = dbMod.query(
+        state.collectionRef,
+        dbMod.orderBy("createdAt", "desc"),
+        dbMod.limit(state.pageLimit)
+      );
+      state.unsubscribe = dbMod.onSnapshot(
+        wishesQuery,
+        function (snapshot) {
+          state.wishes = snapshot.docs.map(function (docSnap) {
+            const data = docSnap.data() || {};
+            return {
+              id: docSnap.id,
+              name: sanitize(data.name, NAME_MAX),
+              position: cleanPosition(data.position),
+              message: sanitizeMessage(data.message, MESSAGE_MAX),
+              createdAt: data.createdAt || null,
+            };
+          });
+          render();
+        },
+        function () {
+          if (state.unsubscribe) state.unsubscribe();
+          state.unsubscribe = null;
+          state.usingFirebase = false;
+          state.listenWishes = null;
+          setStatus("The live wall could not be reached. Showing wishes from this browser.", "error");
+          subscribeLocal();
+        }
+      );
+    };
+
+    state.listenWishes();
 
     return true;
   }
@@ -361,6 +409,11 @@ if (form && wall) {
         submitBtn.disabled = false;
       });
   });
+
+  const loadMoreBtn = document.querySelector("#wish-load-more");
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", loadMoreWishes);
+  }
 
   connectFirebase()
     .then(function (ok) {
