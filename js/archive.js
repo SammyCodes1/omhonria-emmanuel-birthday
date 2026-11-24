@@ -58,7 +58,8 @@
       src: "images/pastor-portrait.jpg",
       alt: "Pastor Omhonria Emmanuel",
       category: "portraits",
-      portrait: true
+      portrait: true,
+      mobileFeature: true
     },
     {
       src: "images/gallery1.jpg",
@@ -160,6 +161,7 @@
       card.className = "archive-card reveal";
       if (photo.featured === "wife") card.className += " archive-card--wife";
       if (photo.featured === "leaders") card.className += " archive-card--leaders";
+      if (photo.mobileFeature) card.className += " archive-card--mobile-feature";
       card.setAttribute("data-category", photo.category || "ministry");
 
       var button = document.createElement("button");

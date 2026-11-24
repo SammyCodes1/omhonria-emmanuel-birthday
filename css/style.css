@@ -3828,6 +3828,42 @@ body.is-lightbox-open .site-nav {
     --gallery-shift: 5px;
   }
 
+  /* Mobile only: seated portrait first and full-width, then a 2-column grid. */
+  .page-archive .container.archive-wrap {
+    width: min(36.5rem, calc(100% - 1.25rem));
+  }
+
+  .archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.75rem;
+    padding-inline: 0.35rem;
+  }
+
+  .archive-card--mobile-feature {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+
+  .archive-card--mobile-feature .archive-item {
+    --gallery-tilt: 0deg;
+    --gallery-shift: 5px;
+  }
+
+  .archive-card--mobile-feature .archive-item.is-portrait img {
+    aspect-ratio: 4 / 5;
+    object-position: center 22%;
+  }
+
+  .archive-card .gallery-caption {
+    max-width: 100%;
+    margin-top: 0.9rem;
+    padding-inline: 0.15rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+  }
+
   .gallery,
   .tribute,
   .page-archive .archive-wrap {
