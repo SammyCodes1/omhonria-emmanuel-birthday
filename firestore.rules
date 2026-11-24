@@ -12,7 +12,7 @@ service cloud.firestore {
         && request.resource.data.name.size() >= 2
         && request.resource.data.name.size() <= 60
         && request.resource.data.message.size() >= 4
-        && request.resource.data.message.size() <= 600
+        && request.resource.data.message.size() <= 6000
         && request.resource.data.createdAt == request.time;
 
       allow update: if false;

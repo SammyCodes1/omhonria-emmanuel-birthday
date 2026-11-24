@@ -1959,7 +1959,10 @@ body.is-lightbox-open .site-nav {
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.55;
+  max-width: 100%;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {
