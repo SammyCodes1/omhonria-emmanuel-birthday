@@ -66,13 +66,16 @@
     },
     {
       src: "images/pastor.jpg",
-      alt: "Pastor Omhonria Emmanuel seated for a portrait, in a white shirt and patterned tie",
+      alt: "The Birthday Celebrant",
+      caption: "The Birthday Celebrant",
       category: "portraits",
-      portrait: true
+      portrait: true,
+      topPair: true
     },
     {
       src: "images/pastor-portrait.jpg",
-      alt: "Pastor Omhonria Emmanuel",
+      alt: "The Birthday Celebrant",
+      caption: "The Birthday Celebrant",
       category: "portraits",
       portrait: true,
       mobileFeature: true
@@ -189,6 +192,7 @@
       if (photo.featured === "wife2") card.className += " archive-card--wife-2";
       if (photo.featured === "leaders") card.className += " archive-card--leaders";
       if (photo.mobileFeature) card.className += " archive-card--mobile-feature";
+      if (photo.topPair) card.className += " archive-card--top-pair";
       card.setAttribute("data-category", photo.category || "ministry");
 
       var button = document.createElement("button");

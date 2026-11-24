@@ -3580,7 +3580,7 @@ body.is-lightbox-open .site-nav {
 }
 
 @media (min-width: 768px) {
-  /* Match mobile: featured portrait first and centered, then a 2-column grid.
+  /* Two featured portraits on the first row, then a 2-column grid.
      Cap the width so cards stay a reasonable size on wide screens. */
   .page-archive .container.archive-wrap {
     width: min(1000px, calc(100% - 4rem));
@@ -3591,25 +3591,31 @@ body.is-lightbox-open .site-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.6rem 1.55rem;
   }
+}
 
-  .archive-card--mobile-feature {
-    grid-column: 1 / -1;
-    order: -1;
-    width: 100%;
-    max-width: 40rem;
-    justify-self: center;
-  }
+/* First row: white-attire portrait (left) and the seated studio portrait (right), equal size. */
+.archive-card--mobile-feature {
+  order: -2;
+}
+.archive-card--top-pair {
+  order: -1;
+}
 
-  .archive-card--mobile-feature .archive-item {
-    --gallery-tilt: 0deg;
-    --gallery-shift: 7px;
-    width: 100%;
-  }
+.page-archive .archive-card.archive-card--mobile-feature .archive-item,
+.page-archive .archive-card.archive-card--top-pair .archive-item {
+  --gallery-tilt: 0deg;
+  --gallery-shift: 6px;
+}
 
-  .archive-card--mobile-feature .archive-item.is-portrait img {
-    aspect-ratio: 4 / 5;
-    object-position: center 22%;
-  }
+.archive-card--mobile-feature .archive-item.is-portrait img,
+.archive-card--top-pair .archive-item.is-portrait img {
+  aspect-ratio: 4 / 5;
+}
+.archive-card--mobile-feature .archive-item.is-portrait img {
+  object-position: center 22%;
+}
+.archive-card--top-pair .archive-item.is-portrait img {
+  object-position: center 16%;
 }
 
 .archive-card--wife .archive-item.is-tall img,
@@ -3855,7 +3861,7 @@ body.is-lightbox-open .site-nav {
     --gallery-shift: 5px;
   }
 
-  /* Mobile only: seated portrait first and full-width, then a 2-column grid. */
+  /* Mobile: 2-column grid with the featured portrait pair on the first row. */
   .page-archive .container.archive-wrap {
     width: min(36.5rem, calc(100% - 1.25rem));
   }
@@ -3864,21 +3870,6 @@ body.is-lightbox-open .site-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem 0.75rem;
     padding-inline: 0.35rem;
-  }
-
-  .archive-card--mobile-feature {
-    grid-column: 1 / -1;
-    order: -1;
-  }
-
-  .archive-card--mobile-feature .archive-item {
-    --gallery-tilt: 0deg;
-    --gallery-shift: 5px;
-  }
-
-  .archive-card--mobile-feature .archive-item.is-portrait img {
-    aspect-ratio: 4 / 5;
-    object-position: center 22%;
   }
 
   .archive-card .gallery-caption {
