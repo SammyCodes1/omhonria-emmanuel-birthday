@@ -3580,33 +3580,35 @@ body.is-lightbox-open .site-nav {
 }
 
 @media (min-width: 768px) {
+  /* Match mobile: featured portrait first and centered, then a 2-column grid.
+     Cap the width so cards stay a reasonable size on wide screens. */
   .page-archive .container.archive-wrap {
-    width: min(36.5rem, calc(100% - 4rem));
-  }
-}
-
-@media (min-width: 900px) {
-  .page-archive .container.archive-wrap {
-    width: min(54rem, calc(100% - 4rem));
+    width: min(1000px, calc(100% - 4rem));
+    margin-inline: auto;
   }
 
   .archive-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1.6rem 1.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem 1.55rem;
   }
 
-  .archive-card {
-    grid-column: span 2;
+  .archive-card--mobile-feature {
+    grid-column: 1 / -1;
+    order: -1;
+    width: 100%;
+    max-width: 40rem;
+    justify-self: center;
   }
 
-  /* First row: the two wife portraits, side by side and equal width. Leaders move to the next row. */
-  .archive-card--wife {
-    grid-column: 1 / 4;
-    grid-row: 1;
+  .archive-card--mobile-feature .archive-item {
+    --gallery-tilt: 0deg;
+    --gallery-shift: 7px;
+    width: 100%;
   }
-  .archive-card--wife-2 {
-    grid-column: 4 / 7;
-    grid-row: 1;
+
+  .archive-card--mobile-feature .archive-item.is-portrait img {
+    aspect-ratio: 4 / 5;
+    object-position: center 22%;
   }
 }
 
