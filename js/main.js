@@ -147,6 +147,7 @@
   initCounters();
   initLightbox();
   initShare();
+  initOfferCopy();
   initBirthdayConfetti();
 
   function pad(value) {
@@ -587,6 +588,59 @@
     if (now.getMonth() + 1 !== month || now.getDate() !== day) return;
 
     window.setTimeout(burstConfetti, 350);
+  }
+
+  function initOfferCopy() {
+    const buttons = document.querySelectorAll(".offer-copy");
+    if (!buttons.length) return;
+
+    function fallbackCopy(text) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (err) {
+        ok = false;
+      }
+      area.remove();
+      return ok;
+    }
+
+    Array.prototype.forEach.call(buttons, function (btn) {
+      const label = btn.querySelector(".offer-copy-label") || btn;
+      const original = label.textContent;
+      const status = btn.parentNode ? btn.parentNode.querySelector(".offer-copy-status") : null;
+      const number = btn.getAttribute("data-copy") || "";
+
+      function markCopied() {
+        label.textContent = "Copied";
+        btn.setAttribute("aria-label", "Account number copied");
+        if (status) status.textContent = "Account number copied.";
+        window.setTimeout(function () {
+          label.textContent = original;
+          if (number) btn.setAttribute("aria-label", "Copy account number " + number);
+          if (status) status.textContent = "";
+        }, 1800);
+      }
+
+      btn.addEventListener("click", function () {
+        const text = btn.getAttribute("data-copy") || "";
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(function () {
+            if (fallbackCopy(text)) markCopied();
+          });
+        } else if (fallbackCopy(text)) {
+          markCopied();
+        }
+      });
+    });
   }
 
   function initShare() {
