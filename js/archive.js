@@ -123,16 +123,6 @@
       category: "ministry"
     },
     {
-      src: "images/gallery3.jpg",
-      alt: "Congregation worshipping in a softly lit sanctuary",
-      category: "ministry"
-    },
-    {
-      src: "images/gallery6.jpg",
-      alt: "Communion table with bread, cup, and candlelight",
-      category: "ministry"
-    },
-    {
       src: "images/gallery-teacher.jpg",
       alt: "",
       category: "ministry"
