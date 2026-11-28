@@ -105,19 +105,16 @@
     {
       src: "images/pastor.jpg",
       alt: "The Birthday Celebrant",
-      caption: "The Birthday Celebrant",
       category: "portraits"
     },
     {
       src: "images/gallery-celebrant-jacket.jpg",
       alt: "The Birthday Celebrant",
-      caption: "The Birthday Celebrant",
       category: "portraits"
     },
     {
       src: "images/gallery-celebrant-smile.jpg",
       alt: "The Birthday Celebrant",
-      caption: "The Birthday Celebrant",
       category: "portraits"
     },
     {
