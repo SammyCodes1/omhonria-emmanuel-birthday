@@ -126,28 +126,8 @@
       category: "ministry"
     },
     {
-      src: "images/gallery1.jpg",
-      alt: "Sanctuary aisle toward the pulpit in gold evening light",
-      category: "ministry"
-    },
-    {
-      src: "images/gallery2.jpg",
-      alt: "Open Bible on a wooden pulpit",
-      category: "ministry"
-    },
-    {
       src: "images/gallery3.jpg",
       alt: "Congregation worshipping in a softly lit sanctuary",
-      category: "ministry"
-    },
-    {
-      src: "images/gallery4.jpg",
-      alt: "Hands sharing bread and soup at a community table",
-      category: "ministry"
-    },
-    {
-      src: "images/gallery5.jpg",
-      alt: "Church doors open at twilight with gold light within",
       category: "ministry"
     },
     {
