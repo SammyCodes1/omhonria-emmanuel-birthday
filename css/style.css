@@ -3790,6 +3790,9 @@ body.is-lightbox-open .site-nav {
 .page-archive .archive-card .archive-item img[src*="gallery-celebrant-smile"] {
   object-position: center 24%;
 }
+.page-archive .archive-card .archive-item img[src*="archive-pulpit"] {
+  object-position: center 15%;
+}
 
 .archive-item.is-group:hover img,
 .archive-item.is-group:focus-visible img {

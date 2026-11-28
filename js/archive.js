@@ -65,6 +65,13 @@
       group: true
     },
     {
+      src: "images/archive-sanitation.jpg",
+      alt: "The Sanitation Unit",
+      caption: "The Sanitation Unit",
+      category: "ministry",
+      group: true
+    },
+    {
       src: "images/gallery-celebrant-bw.jpg",
       alt: "The Birthday Celebrant",
       caption: "The Birthday Celebrant",
@@ -157,6 +164,11 @@
       alt: "The Birthday Celebrant",
       caption: "The Birthday Celebrant",
       category: "portraits"
+    },
+    {
+      src: "images/archive-pulpit.jpg",
+      alt: "Preaching at a clear pulpit",
+      category: "ministry"
     }
   ];
 
