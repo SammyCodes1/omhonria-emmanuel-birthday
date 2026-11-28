@@ -726,6 +726,15 @@ button {
   max-width: 36ch;
 }
 
+.gold-word {
+  color: var(--gold);
+}
+
+/* On the dark hero, use the lighter gold so the word stays bright against the scrim. */
+.hero-blessing .gold-word {
+  color: var(--gold-light);
+}
+
 .hero-verse {
   margin: 0.85rem 0 0;
   padding: 0;
