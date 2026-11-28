@@ -242,7 +242,7 @@
       var img = document.createElement("img");
       img.src = photo.src;
       img.alt = photo.alt || "";
-      img.loading = "lazy";
+      img.loading = "eager";
       img.decoding = "async";
 
       var overlay = document.createElement("span");
