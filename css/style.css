@@ -2556,71 +2556,6 @@ body.is-lightbox-open .site-nav {
     var(--navy);
 }
 
-.page-give .give-how-kicker {
-  margin: 0 0 0.85rem;
-  color: var(--gold-light);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.page-give .give-how {
-  display: grid;
-  gap: 1rem;
-  margin: 0 0 2rem;
-  padding: 0;
-  list-style: none;
-}
-
-.page-give .give-how li {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  column-gap: 0.85rem;
-}
-
-.page-give .give-how li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 1.34rem;
-  top: 2.7rem;
-  bottom: -1rem;
-  width: 1px;
-  background: linear-gradient(180deg, rgb(212 175 55 / 0.55), rgb(240 215 123 / 0.18));
-  pointer-events: none;
-}
-
-.page-give .give-how-icon {
-  grid-row: 1 / span 2;
-  display: grid;
-  place-items: center;
-  width: 2.7rem;
-  height: 2.7rem;
-  border: 1px solid rgb(212 175 55 / 0.65);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 30%, rgb(240 215 123 / 0.2), transparent 62%),
-    rgb(20 41 92 / 0.9);
-  color: var(--gold-light);
-  box-shadow: 0 0 0 4px rgb(6 15 38 / 0.55), 0 0 18px rgb(212 175 55 / 0.12);
-}
-
-.page-give .give-how-icon svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-.page-give .give-how-text {
-  grid-column: 2;
-  color: var(--cream);
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-style: italic;
-}
-
 .page-give .offer-grid {
   display: grid;
   gap: 1.2rem;
@@ -2995,46 +2930,6 @@ body.is-lightbox-open .site-nav {
 
   .page-give .offer {
     padding: 3.4rem 0 5rem;
-  }
-
-  .page-give .give-how {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 38rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2.25rem;
-    padding: 1.15rem 0.4rem 1.2rem;
-    border: 1px solid rgb(212 175 55 / 0.28);
-    border-radius: 1.15rem;
-    background: rgb(6 15 38 / 0.35);
-  }
-
-  .page-give .give-how li {
-    justify-items: center;
-    text-align: center;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-
-  .page-give .give-how-icon {
-    grid-row: auto;
-    margin-bottom: 0.2rem;
-  }
-
-  .page-give .give-how-text {
-    grid-column: auto;
-  }
-
-
-  .page-give .give-how li:not(:last-child)::after {
-    top: 1.3rem;
-    right: auto;
-    left: calc(50% + 1.7rem);
-    bottom: auto;
-    width: calc(100% - 3.4rem);
-    height: 1px;
-    background: linear-gradient(90deg, rgb(212 175 55 / 0.65), rgb(240 215 123 / 0.2));
   }
 
   .page-give .offer-grid {
